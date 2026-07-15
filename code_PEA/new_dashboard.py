@@ -552,18 +552,16 @@ with tab4:
     corr_labels = [LABELS[t] for t in correlation_matrix.index]
     corr_values = correlation_matrix.values
 
-    # Paire divergente bleu/rouge (jamais rouge/vert : illisible en daltonisme
-    # deutéranopie/protanopie) — le neutre (corrélation nulle) reste gris surface.
     fig_corr = go.Figure(go.Heatmap(
         z=corr_values,
         x=corr_labels,
         y=corr_labels,
         colorscale=[
-            [0.0,  "#3987e5"],
+            [0.0,  "#4fbf82"],
             [0.5,  "#20242e"],
             [1.0,  "#e0655c"],
         ],
-        zmin=-1, zmax=1,
+        zmin=0, zmax=1,
         text=np.round(corr_values, 2),
         texttemplate="%{text}",
         textfont=dict(size=12, family="IBM Plex Mono, monospace"),
@@ -583,7 +581,7 @@ with tab4:
 
     st.markdown("### Lecture rapide")
     col_a, col_b, col_c = st.columns(3)
-    col_a.info("**> 0.7** — Forte corrélation, peu de diversification")
+    col_a.error("**> 0.7** — Forte corrélation, peu de diversification")
     col_b.warning("**0.3 – 0.7** — Corrélation modérée")
     col_c.success("**< 0.3** — Faible corrélation, bonne diversification")
 
