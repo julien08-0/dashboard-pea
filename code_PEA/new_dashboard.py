@@ -558,7 +558,7 @@ with tab4:
         y=corr_labels,
         colorscale=[
             [0.0,  "#4fbf82"],
-            [0.5,  "#20242e"],
+            [0.5,  "#c9a15f"],
             [1.0,  "#e0655c"],
         ],
         zmin=0, zmax=1,
