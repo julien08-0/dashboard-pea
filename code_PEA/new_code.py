@@ -33,32 +33,32 @@ ETFS = {
     "PASI.PA": {
         "libelle": "AM.PEA CHINE (MS.C.)SCR.UC.ETF AM.PEA CHN SCREEN.",
         "nom": "Chine",
-        "couleur": "#ff6b6b",
+        "couleur": "#3987e5",
     },
     "PINR.PA": {
         "libelle": "AMUN.PEA INDE UC.ETF ACC FCP AM.PEA INDE ACC",
         "nom": "Inde",
-        "couleur": "#ffd166",
+        "couleur": "#c98500",
     },
     "ETSZ.DE": {
         "libelle": "BNP PAR.EASY STOX.EU.600 U.ETF BNPETF STOXX 600",
         "nom": "Europe 600",
-        "couleur": "#4fffb0",
+        "couleur": "#199e70",
     },
     "ESE.PA": {
         "libelle": "BNPP EASY S&P 500 UC.EUR ETF BNPP S&P500EUR ETF",
         "nom": "S&P 500",
-        "couleur": "#7c6fff",
+        "couleur": "#9085e9",
     },
     "ESEH.PA": {
         "libelle": "BNPP E.S P 500 UCIT.ETF.E.HDG BNPP E.S P 500 U.",
         "nom": "S&P 500 Hedgé",
-        "couleur": "#06d6a0",
+        "couleur": "#d55181",
     },
     "0P0001DKPN.F": {
         "libelle": "IND.ET EXP.EUROPE SM.IC EUR 4D IE EUROPE SM.IC 4D",
         "nom": "Indép. Europe Small",
-        "couleur": "#a8dadc",
+        "couleur": "#d95926",
     },
 }
 

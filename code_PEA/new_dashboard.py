@@ -16,77 +16,148 @@ st.set_page_config(
 # ── CSS personnalisé ──────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
     :root {
-        --bg:        #0d0f14;
-        --surface:   #151820;
-        --border:    #1e2330;
-        --accent:    #4fffb0;
-        --accent2:   #7c6fff;
-        --accent3:   #ff6b6b;
-        --text:      #e8ecf4;
-        --muted:     #6b7280;
+        --bg:          #0b0d11;
+        --surface:     #14171e;
+        --surface-2:   #191d25;
+        --border:      #262b35;
+        --border-soft: #1b1f27;
+        --ink:         #edf0f4;
+        --ink-2:       #9aa3b2;
+        --ink-3:       #626b7a;
+        --brass:       #c9a15f;
+        --brass-soft:  rgba(201,161,95,0.12);
+        --brass-line:  rgba(201,161,95,0.4);
+        --positive:    #4fbf82;
+        --negative:    #e0655c;
     }
 
     html, body, [data-testid="stAppViewContainer"] {
         background-color: var(--bg) !important;
-        color: var(--text) !important;
-        font-family: 'DM Mono', monospace;
+        color: var(--ink) !important;
+        font-family: 'Inter', sans-serif;
     }
 
     [data-testid="stHeader"] { background: transparent !important; }
     [data-testid="stSidebar"] { background: var(--surface) !important; }
+    [data-testid="stMainBlockContainer"] { padding-top: 2.4rem !important; max-width: 1280px; }
 
     /* Titres */
-    h1 { font-family: 'DM Serif Display', serif !important; font-size: 2.8rem !important; color: var(--text) !important; letter-spacing: -0.02em; }
-    h2 { font-family: 'DM Serif Display', serif !important; color: var(--text) !important; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
-    h3 { font-family: 'DM Mono', monospace !important; font-size: 0.75rem !important; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted) !important; }
-
-    /* Metric cards */
-    [data-testid="metric-container"] {
-        background: var(--surface) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 12px !important;
-        padding: 1rem 1.2rem !important;
-    }
-    [data-testid="stMetricValue"] { font-family: 'DM Mono', monospace !important; font-size: 1.6rem !important; color: var(--accent) !important; }
-    [data-testid="stMetricLabel"] { color: var(--muted) !important; font-size: 0.7rem !important; text-transform: uppercase; letter-spacing: 0.1em; }
-    [data-testid="stMetricDelta"] { font-size: 0.8rem !important; }
+    h1 { font-family: 'Fraunces', serif !important; font-weight: 500 !important; color: var(--ink) !important; letter-spacing: -0.01em; }
+    h2 { font-family: 'Fraunces', serif !important; font-weight: 500 !important; font-size: 1.5rem !important; color: var(--ink) !important; margin-top: 0.4rem !important; }
+    h3 { font-family: 'Inter', sans-serif !important; font-size: 0.72rem !important; font-weight: 600 !important; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3) !important; }
 
     /* Tabs */
+    [data-testid="stTabs"] { margin-top: 0.6rem; }
+    [data-testid="stTabs"] [data-baseweb="tab-list"] { gap: 1.8rem; border-bottom: 1px solid var(--border); }
     [data-testid="stTabs"] button {
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.75rem !important;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--muted) !important;
-        border-radius: 6px 6px 0 0 !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.02em;
+        color: var(--ink-3) !important;
+        padding: 0 0.1rem 0.8rem 0.1rem !important;
     }
     [data-testid="stTabs"] button[aria-selected="true"] {
-        color: var(--accent) !important;
-        border-bottom: 2px solid var(--accent) !important;
+        color: var(--ink) !important;
+        border-bottom: 2px solid var(--brass) !important;
     }
+    [data-testid="stTabs"] [data-baseweb="tab-highlight"] { background-color: var(--brass) !important; }
+    [data-testid="stTabs"] [data-baseweb="tab-border"] { display: none; }
 
     /* Dataframe */
-    [data-testid="stDataFrame"] { border: 1px solid var(--border) !important; border-radius: 10px !important; }
+    [data-testid="stDataFrame"] { border: 1px solid var(--border) !important; border-radius: 10px !important; font-family: 'IBM Plex Mono', monospace !important; }
+
+    /* Alerts */
+    [data-testid="stAlertContainer"] {
+        background: var(--surface) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
+        font-family: 'Inter', sans-serif !important;
+    }
 
     /* Divider */
     hr { border-color: var(--border) !important; }
+    .rule {
+        height: 1px;
+        margin: 2.2rem 0 1.8rem 0;
+        background: linear-gradient(90deg, var(--brass-line) 0%, var(--border) 35%, var(--border) 100%);
+    }
 
     .tag {
         display: inline-block;
-        background: var(--border);
-        color: var(--muted);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--ink-3);
+        font-family: 'IBM Plex Mono', monospace;
         font-size: 0.65rem;
-        padding: 2px 8px;
+        padding: 2px 9px;
         border-radius: 20px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-right: 4px;
     }
-    .highlight { color: var(--accent); }
-    .negative  { color: var(--accent3); }
+    .highlight { color: var(--positive); }
+    .negative  { color: var(--negative); }
+
+    /* ── Masthead ── */
+    .masthead-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--brass);
+        margin-bottom: 0.3rem;
+    }
+    .masthead-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; }
+    .masthead-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 2.6rem; color: var(--ink); letter-spacing: -0.01em; line-height: 1; }
+    .masthead-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-3); display: flex; align-items: center; gap: 0.5rem; }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--positive); display: inline-block; box-shadow: 0 0 0 3px rgba(79,191,130,0.15); }
+
+    /* ── Hero KPI ── */
+    .hero {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: 0.4rem;
+    }
+    .hero-main { padding: 1.9rem 2.2rem; }
+    .hero-eyebrow { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.7rem; }
+    .hero-value { font-family: 'Fraunces', serif; font-weight: 500; font-size: 3rem; color: var(--ink); line-height: 1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+    .hero-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-3); margin-top: 0.6rem; }
+    .hero-chip {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        margin-top: 1.1rem; padding: 0.32rem 0.8rem;
+        border-radius: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+        border: 1px solid;
+    }
+    .hero-chip.positive { color: var(--positive); border-color: rgba(79,191,130,0.35); background: rgba(79,191,130,0.08); }
+    .hero-chip.negative { color: var(--negative); border-color: rgba(224,101,92,0.35); background: rgba(224,101,92,0.08); }
+    .ledger { display: flex; flex-direction: column; justify-content: center; padding: 1.4rem 2.2rem; background: var(--surface-2); border-left: 1px solid var(--border); }
+    .ledger-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.6rem 0; border-bottom: 1px solid var(--border-soft); }
+    .ledger-row:last-child { border-bottom: none; }
+    .ledger-label { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+    .ledger-value { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    /* ── ETF cards ── */
+    .etf-card { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--card-color, var(--brass)); border-radius: 10px; padding: 1.25rem 1.35rem 1.05rem; margin-bottom: 1.2rem; }
+    .etf-card .ticker-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: var(--ink-3); background: var(--surface-2); border: 1px solid var(--border); padding: 2px 9px; border-radius: 20px; display: inline-block; margin-bottom: 0.65rem; }
+    .etf-card .name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.1rem; }
+    .etf-card .value { font-family: 'IBM Plex Mono', monospace; font-size: 1.35rem; color: var(--card-color, var(--ink)); margin-bottom: 0.85rem; font-variant-numeric: tabular-nums; }
+    .etf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .etf-grid > div { padding: 0.55rem 0.1rem 0.4rem 0; border-top: 1px solid var(--border-soft); }
+    .etf-grid > div:nth-child(-n+3) { border-top: none; }
+    .etf-grid .lbl { font-family: 'Inter', sans-serif; font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-3); }
+    .etf-grid .val { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; margin-top: 3px; font-variant-numeric: tabular-nums; }
+
+    .legend-chip { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--ink-2); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -121,9 +192,14 @@ COLORS = {t: cfg["couleur"] for t, cfg in ETFS.items()}
 tickers = list(ETFS.keys())
 
 # ── HEADER ────────────────────────────────────────────────────────────────────
-st.markdown("# Dashboard PEA")
-st.markdown(f"<span class='tag'>Mise à jour</span> <span style='color:#6b7280;font-size:0.8rem'>{pd.Timestamp.today().strftime('%d %b %Y')}</span>", unsafe_allow_html=True)
-st.markdown("")
+st.markdown(f"""
+<div class="masthead-eyebrow">Plan d'Épargne en Actions</div>
+<div class="masthead-row">
+    <div class="masthead-title">Portefeuille</div>
+    <div class="masthead-meta"><span class="live-dot"></span>Actualisé le {pd.Timestamp.today().strftime('%d %B %Y')}</div>
+</div>
+<div class="rule"></div>
+""", unsafe_allow_html=True)
 
 # ── Alerte ETF non configurés ─────────────────────────────────────────────────
 # Une opération d'achat/vente dont le libellé ne matche aucune entrée de ETFS
@@ -141,35 +217,59 @@ if not etfs_non_suivis.empty:
 
 # ── KPIs globaux ──────────────────────────────────────────────────────────────
 valeur_portefeuille = valeur_totale  # ETFs uniquement
-valeur_totale_avec_cash = valeur_totale + cash["cash_tot"].iloc[-1]
+valeur_cash = cash["cash_tot"].iloc[-1]
+valeur_totale_avec_cash = valeur_totale + valeur_cash
 
-k1, k2, k3, k4, k5, k6 = st.columns(6)
-k1.metric("📊 Valeur en Portefeuille", f"{valeur_portefeuille:,.0f} €")
-k2.metric("💰 Valeur Totale", f"{valeur_totale_avec_cash:,.0f} €")
-k3.metric("📈 CAGR Global", f"{cagr_global} %")
-k4.metric("〰 Vol Globale", f"{vol_global} %")
-k5.metric("⚡ Sharpe Global", f"{sharpe_global}")
-k6.metric("💵 Cash", f"{cash['cash_tot'].iloc[-1]:,.0f} €")
+cagr_sens = "positive" if cagr_global >= 0 else "negative"
+cagr_signe = "+" if cagr_global >= 0 else ""
+cagr_fleche = "↑" if cagr_global >= 0 else "↓"
 
-st.markdown("---")
+st.markdown(f"""
+<div class="hero">
+    <div class="hero-main">
+        <div class="hero-eyebrow">Valeur totale du portefeuille</div>
+        <div class="hero-value">{valeur_totale_avec_cash:,.0f} €</div>
+        <div class="hero-sub">dont {valeur_portefeuille:,.0f} € investis en ETF · {valeur_cash:,.0f} € de cash disponible</div>
+        <div class="hero-chip {cagr_sens}">{cagr_fleche} {cagr_signe}{cagr_global:.2f} % CAGR annualisé</div>
+    </div>
+    <div class="ledger">
+        <div class="ledger-row"><span class="ledger-label">Valeur ETF</span><span class="ledger-value">{valeur_portefeuille:,.0f} €</span></div>
+        <div class="ledger-row"><span class="ledger-label">Volatilité globale</span><span class="ledger-value">{vol_global:.2f} %</span></div>
+        <div class="ledger-row"><span class="ledger-label">Ratio de Sharpe</span><span class="ledger-value">{sharpe_global:.2f}</span></div>
+        <div class="ledger-row"><span class="ledger-label">Cash disponible</span><span class="ledger-value">{valeur_cash:,.0f} €</span></div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="rule"></div>', unsafe_allow_html=True)
 
 # ── TABS ──────────────────────────────────────────────────────────────────────
 tab3, tab2, tab1, tab4, tab5 = st.tabs([
-    "🌍  Portefeuille",
-    "📉  Cours & Achats",
-    "📐  Métriques",
-    "🔗  Corrélations",
-    "🎯  Frontière Efficiente",
+    "Portefeuille",
+    "Cours & Achats",
+    "Métriques",
+    "Corrélations",
+    "Frontière efficiente",
 ])
+
+INK = "#edf0f4"
+INK_MUTED = "#9aa3b2"
+BORDER_SOFT = "#1f232c"
+BRASS = "#c9a15f"
 
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="DM Mono, monospace", color="#e8ecf4", size=11),
-    xaxis=dict(gridcolor="#1e2330", zeroline=False),
-    yaxis=dict(gridcolor="#1e2330", zeroline=False),
+    font=dict(family="IBM Plex Mono, monospace", color=INK_MUTED, size=11),
+    xaxis=dict(gridcolor=BORDER_SOFT, zeroline=False),
+    yaxis=dict(gridcolor=BORDER_SOFT, zeroline=False),
     margin=dict(l=10, r=10, t=40, b=10),
 )
+
+# Titre en dict (jamais en simple chaîne) partout où on en met un : Plotly
+# affiche littéralement "undefined" si un title_font global existe sans texte.
+def titre(text):
+    return dict(text=text, font=dict(family="Fraunces, serif", color=INK, size=15))
 
 # ────────────────────────────────────────────────────────────────────────────
 # TAB 1 — Récapitulatif des indicateurs
@@ -194,15 +294,15 @@ with tab1:
     def color_val(val):
         if isinstance(val, float):
             if val > 0:
-                return "color: #4fffb0"
+                return "color: #4fbf82"
             elif val < 0:
-                return "color: #ff6b6b"
+                return "color: #e0655c"
         return ""
 
     styled = df_table.style.map(color_val).format("{:.2f}")
     st.dataframe(styled, use_container_width=True, height=280)
 
-    st.markdown("---")
+    st.markdown('<div class="rule"></div>', unsafe_allow_html=True)
     st.markdown("## Détail par ETF")
 
     cols = st.columns(3)
@@ -213,24 +313,17 @@ with tab1:
         valeur_etf = data_prix_dict[ticker]["prix_tot"].iloc[-1]
         with col:
             st.markdown(f"""
-            <div style="background:#151820;border:1px solid #1e2330;border-left:3px solid {color};
-                        border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem">
-                <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:#6b7280;margin-bottom:0.5rem">
-                    {ticker}
-                </div>
-                <div style="font-size:1.1rem;font-family:'DM Serif Display',serif;color:#e8ecf4;margin-bottom:0.3rem">
-                    {LABELS[ticker]}
-                </div>
-                <div style="font-size:1.3rem;font-family:'DM Mono',monospace;color:{color};margin-bottom:0.8rem;font-weight:500">
-                    {valeur_etf:,.0f} €
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;font-size:0.78rem">
-                    <div><span style="color:#6b7280">CAGR</span><br><span style="color:{color}">{ind['cagr']:+.2f}%</span></div>
-                    <div><span style="color:#6b7280">TWR</span><br><span style="color:{color}">{ind['twr']:+.2f}%</span></div>
-                    <div><span style="color:#6b7280">Sharpe</span><br><span style="color:#e8ecf4">{ind['sharpe']:.2f}</span></div>
-                    <div><span style="color:#6b7280">Sortino</span><br><span style="color:#e8ecf4">{ind['sortino']:.2f}</span></div>
-                    <div><span style="color:#6b7280">Vol ETF</span><br><span style="color:#e8ecf4">{ind['vol_etf']:.1f}%</span></div>
-                    <div><span style="color:#6b7280">Max DD</span><br><span style="color:#ff6b6b">{ind['mdd']:.2f}%</span></div>
+            <div class="etf-card" style="--card-color:{color}">
+                <div class="ticker-tag">{ticker}</div>
+                <div class="name">{LABELS[ticker]}</div>
+                <div class="value">{valeur_etf:,.0f} €</div>
+                <div class="etf-grid">
+                    <div><div class="lbl">CAGR</div><div class="val" style="color:{color}">{ind['cagr']:+.2f}%</div></div>
+                    <div><div class="lbl">TWR</div><div class="val" style="color:{color}">{ind['twr']:+.2f}%</div></div>
+                    <div><div class="lbl">Vol ETF</div><div class="val">{ind['vol_etf']:.1f}%</div></div>
+                    <div><div class="lbl">Sharpe</div><div class="val">{ind['sharpe']:.2f}</div></div>
+                    <div><div class="lbl">Sortino</div><div class="val">{ind['sortino']:.2f}</div></div>
+                    <div><div class="lbl">Max DD</div><div class="val" style="color:#e0655c">{ind['mdd']:.2f}%</div></div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -280,17 +373,17 @@ with tab2:
             mode="markers",
             name="Achat",
             marker=dict(
-                color="#ffd166",
+                color=BRASS,
                 size=10,
                 symbol="triangle-up",
-                line=dict(color="#0d0f14", width=1.5)
+                line=dict(color="#0b0d11", width=1.5)
             ),
             hovertemplate="<b>Achat</b><br>Date: %{x}<br>Cours: %{y:.2f}€<extra></extra>"
         ))
 
     fig.update_layout(
         **PLOTLY_LAYOUT,
-        title=f"{LABELS[ticker_choisi]} — Cours & Achats",
+        title=titre(f"{LABELS[ticker_choisi]} — Cours & Achats"),
         legend=dict(bgcolor="rgba(0,0,0,0)"),
         height=420,
     )
@@ -334,17 +427,17 @@ with tab3:
             labels=labels_pie,
             values=values_pie,
             hole=0.55,
-            marker=dict(colors=colors_pie, line=dict(color="#0d0f14", width=2)),
-            textfont=dict(family="DM Mono, monospace", size=11),
+            marker=dict(colors=colors_pie, line=dict(color="#0b0d11", width=2)),
+            textfont=dict(family="IBM Plex Mono, monospace", size=11),
             hovertemplate="<b>%{label}</b><br>%{value:,.0f} €<br>%{percent}<extra></extra>",
         ))
         fig_pie.update_layout(
             **PLOTLY_LAYOUT,
-            title="Poids par ETF",
+            title=titre("Poids par ETF"),
             annotations=[dict(
                 text=f"<b>{valeur_totale:,.0f}€</b>",
                 x=0.5, y=0.5, font_size=14,
-                font_color="#e8ecf4", showarrow=False
+                font_color=INK, showarrow=False
             )],
             showlegend=True,
             legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(size=10)),
@@ -360,12 +453,12 @@ with tab3:
         fig_bar = go.Figure(go.Bar(
             x=contrib_labels,
             y=contrib_values,
-            marker=dict(color=contrib_colors, line=dict(color="#0d0f14", width=1)),
+            marker=dict(color=contrib_colors, line=dict(color="#0b0d11", width=1)),
             hovertemplate="<b>%{x}</b><br>Contribution: %{y:.1f}%<extra></extra>",
         ))
         fig_bar.update_layout(
             **PLOTLY_LAYOUT,
-            title="Contribution au risque (%)",
+            title=titre("Contribution au risque (%)"),
             height=380,
         )
         st.plotly_chart(fig_bar, use_container_width=True)
@@ -399,7 +492,7 @@ with tab3:
 
     fig_tot.update_layout(
         **PLOTLY_LAYOUT,
-        title="Valeur totale empilée par ETF",
+        title=titre("Valeur totale empilée par ETF"),
         height=380,
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(size=10)),
     )
@@ -415,13 +508,13 @@ with tab3:
         name="Actuel",
         x=[LABELS[t] for t in poids_actuel.index],
         y=poids_actuel.values,
-        marker_color="#7c6fff",
+        marker_color=BRASS,
     ))
     fig_comp.add_trace(go.Bar(
         name="Optimal",
         x=[LABELS[t] for t in poids_opt.index],
         y=poids_opt.values,
-        marker_color="#4fffb0",
+        marker_color="#3987e5",
     ))
     fig_comp.update_layout(
         **PLOTLY_LAYOUT,
@@ -433,16 +526,22 @@ with tab3:
 
     # Métriques actuel vs optimal
     ca, co = st.columns(2)
-    with ca:
-        st.markdown("**Portefeuille actuel**")
-        st.metric("Rendement", f"{comparaison['actuel']['rendement']:.2f} %")
-        st.metric("Volatilité", f"{comparaison['actuel']['vol']:.2f} %")
-        st.metric("Sharpe", f"{comparaison['actuel']['sharpe']:.2f}")
-    with co:
-        st.markdown("**Portefeuille optimal**")
-        st.metric("Rendement", f"{comparaison['optimal']['rendement']:.2f} %")
-        st.metric("Volatilité", f"{comparaison['optimal']['vol']:.2f} %")
-        st.metric("Sharpe", f"{comparaison['optimal']['sharpe']:.2f}")
+    for col, titre_carte, cle, couleur in (
+        (ca, "Portefeuille actuel", "actuel", BRASS),
+        (co, "Portefeuille optimal (max Sharpe)", "optimal", "#3987e5"),
+    ):
+        m = comparaison[cle]
+        with col:
+            st.markdown(f"""
+            <div class="etf-card" style="--card-color:{couleur}">
+                <div class="name">{titre_carte}</div>
+                <div class="etf-grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:0.6rem">
+                    <div><div class="lbl">Rendement</div><div class="val" style="color:{couleur}">{m['rendement']:.2f}%</div></div>
+                    <div><div class="lbl">Volatilité</div><div class="val">{m['vol']:.2f}%</div></div>
+                    <div><div class="lbl">Sharpe</div><div class="val">{m['sharpe']:.2f}</div></div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
 # ────────────────────────────────────────────────────────────────────────────
 # TAB 4 — Corrélations
@@ -453,29 +552,31 @@ with tab4:
     corr_labels = [LABELS[t] for t in correlation_matrix.index]
     corr_values = correlation_matrix.values
 
+    # Paire divergente bleu/rouge (jamais rouge/vert : illisible en daltonisme
+    # deutéranopie/protanopie) — le neutre (corrélation nulle) reste gris surface.
     fig_corr = go.Figure(go.Heatmap(
         z=corr_values,
         x=corr_labels,
         y=corr_labels,
         colorscale=[
-            [0.0,  "#ff6b6b"],
-            [0.5,  "#151820"],
-            [1.0,  "#4fffb0"],
+            [0.0,  "#3987e5"],
+            [0.5,  "#20242e"],
+            [1.0,  "#e0655c"],
         ],
         zmin=-1, zmax=1,
         text=np.round(corr_values, 2),
         texttemplate="%{text}",
-        textfont=dict(size=12, family="DM Mono, monospace"),
+        textfont=dict(size=12, family="IBM Plex Mono, monospace"),
         hovertemplate="<b>%{x} / %{y}</b><br>Corrélation: %{z:.2f}<extra></extra>",
     ))
     fig_corr.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="DM Mono, monospace", color="#e8ecf4", size=11),
+        font=dict(family="IBM Plex Mono, monospace", color=INK_MUTED, size=11),
         margin=dict(l=10, r=10, t=40, b=10),
         height=480,
-        xaxis=dict(side="bottom", gridcolor="#1e2330", zeroline=False),
-        yaxis=dict(gridcolor="#1e2330", zeroline=False),
+        xaxis=dict(side="bottom", gridcolor=BORDER_SOFT, zeroline=False),
+        yaxis=dict(gridcolor=BORDER_SOFT, zeroline=False),
     )
 
     st.plotly_chart(fig_corr, use_container_width=True)
@@ -494,7 +595,8 @@ with tab5:
 
     fig_front = go.Figure()
 
-    # Nuage de portefeuilles simulés coloré par Sharpe
+    # Nuage de portefeuilles simulés coloré par Sharpe — magnitude = une seule
+    # teinte du clair au foncé (jamais un arc-en-ciel, qui n'a pas d'ordre perceptif).
     fig_front.add_trace(go.Scatter(
         x=df_frontiere["vol"],
         y=df_frontiere["rendement"],
@@ -503,17 +605,17 @@ with tab5:
         marker=dict(
             color=df_frontiere["sharpe"],
             colorscale=[
-                [0.0, "#ff6b6b"],
-                [0.5, "#7c6fff"],
-                [1.0, "#4fffb0"],
+                [0.0, "#1c2230"],
+                [0.35, "#1c5cab"],
+                [1.0, "#86b6ef"],
             ],
             size=5,
-            opacity=0.7,
+            opacity=0.75,
             colorbar=dict(
                 title="Sharpe",
-                tickfont=dict(family="DM Mono, monospace", size=10),
+                tickfont=dict(family="IBM Plex Mono, monospace", size=10),
                 bgcolor="rgba(0,0,0,0)",
-                bordercolor="#1e2330",
+                bordercolor=BORDER_SOFT,
             ),
         ),
         hovertemplate="Vol: %{x:.1f}%<br>Rend: %{y:.1f}%<extra></extra>",
@@ -525,10 +627,10 @@ with tab5:
         y=[comparaison["actuel"]["rendement"]],
         mode="markers+text",
         name="Actuel",
-        marker=dict(color="#ffd166", size=14, symbol="star", line=dict(color="#0d0f14", width=1.5)),
+        marker=dict(color=BRASS, size=14, symbol="star", line=dict(color="#0b0d11", width=1.5)),
         text=["Actuel"],
         textposition="top center",
-        textfont=dict(color="#ffd166", size=11),
+        textfont=dict(color=BRASS, size=11),
     ))
 
     # Portefeuille optimal
@@ -537,19 +639,19 @@ with tab5:
         y=[comparaison["optimal"]["rendement"]],
         mode="markers+text",
         name="Optimal",
-        marker=dict(color="#4fffb0", size=14, symbol="star", line=dict(color="#0d0f14", width=1.5)),
+        marker=dict(color="#3987e5", size=14, symbol="star", line=dict(color="#0b0d11", width=1.5)),
         text=["Optimal"],
         textposition="top center",
-        textfont=dict(color="#4fffb0", size=11),
+        textfont=dict(color="#3987e5", size=11),
     ))
 
     fig_front.update_layout(
         **PLOTLY_LAYOUT,
-        title="Espace risque/rendement — 1 000 portefeuilles simulés",
+        title=titre("Espace risque/rendement — 1 000 portefeuilles simulés"),
         xaxis_title="Volatilité (%)",
         yaxis_title="Rendement (%)",
-        height=520,
-        legend=dict(bgcolor="rgba(0,0,0,0)"),
+        height=560,
+        legend=dict(orientation="h", x=0.5, xanchor="center", y=-0.18, bgcolor="rgba(0,0,0,0)"),
     )
     st.plotly_chart(fig_front, use_container_width=True)
 
@@ -561,7 +663,7 @@ with tab5:
     fig_opt = go.Figure(go.Bar(
         x=opt_labels,
         y=opt_values,
-        marker=dict(color=opt_colors, line=dict(color="#0d0f14", width=1)),
+        marker=dict(color=opt_colors, line=dict(color="#0b0d11", width=1)),
         hovertemplate="<b>%{x}</b><br>%{y:.1f}%<extra></extra>",
     ))
     fig_opt.update_layout(**PLOTLY_LAYOUT, height=300)
