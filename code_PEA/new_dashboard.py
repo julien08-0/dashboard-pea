@@ -13,6 +13,132 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# ── Traductions ────────────────────────────────────────────────────────────────
+# Un seul dictionnaire pilote les deux langues : ajouter une chaîne d'interface
+# ne nécessite de la déclarer qu'ici, jamais en dur plus bas dans le fichier.
+MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin",
+           "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+MOIS_EN = ["January", "February", "March", "April", "May", "June",
+           "July", "August", "September", "October", "November", "December"]
+
+TRANSLATIONS = {
+    "fr": {
+        "eyebrow": "Plan d'Épargne en Actions",
+        "title": "Portefeuille",
+        "updated_on": "Actualisé le {date}",
+        "warning_non_suivis": (
+            "⚠️ **{n} opération(s)** sur **{m} ETF non configuré(s)** dans `ETFS` (new_code.py) — "
+            "**{montant:,.0f} €** non pris en compte dans les totaux ci-dessous.\n\n{liste}\n\n"
+            "Ajoute ce(s) ticker(s) dans `ETFS` pour qu'ils soient suivis."
+        ),
+        "hero_label": "Valeur totale du portefeuille",
+        "hero_sub": "dont {etf:,.0f} € investis en ETF · {cash:,.0f} € de cash disponible",
+        "cagr_annualise": "CAGR annualisé",
+        "ledger_valeur_etf": "Valeur ETF",
+        "ledger_vol_globale": "Volatilité globale",
+        "ledger_sharpe": "Ratio de Sharpe",
+        "ledger_cash": "Cash disponible",
+        "tabs": ["Portefeuille", "Cours & Achats", "Métriques", "Corrélations", "Frontière efficiente"],
+        "tab1_metrics_header": "Métriques par ETF",
+        "tab1_detail_header": "Détail par ETF",
+        "card_cagr": "CAGR", "card_twr": "TWR", "card_vol_etf": "Vol ETF",
+        "card_sharpe": "Sharpe", "card_sortino": "Sortino", "card_mdd": "Max DD",
+        "tab2_header": "Évolution du cours avec points d'achat",
+        "select_etf": "Choisir un ETF",
+        "legend_cours": "Cours",
+        "legend_achat": "Achat",
+        "hover_achat": "<b>Achat</b><br>Date: %{{x}}<br>Cours: %{{y:.2f}}€<extra></extra>",
+        "chart_cours_achats": "{nom} — Cours & Achats",
+        "position_dans_le_temps": "Valeur de la position dans le temps",
+        "legend_valeur_position": "Valeur position",
+        "tab3_repartition": "Répartition du capital",
+        "chart_poids_par_etf": "Poids par ETF",
+        "chart_contribution_risque": "Contribution au risque (%)",
+        "hover_contribution": "<b>%{{x}}</b><br>Contribution: %{{y:.1f}}%<extra></extra>",
+        "evolution_valeur_totale": "Évolution de la valeur totale du portefeuille",
+        "chart_valeur_empilee": "Valeur totale empilée par ETF",
+        "poids_actuel_vs_optimal": "Poids actuel vs Optimal (max Sharpe)",
+        "legend_actuel": "Actuel",
+        "legend_optimal": "Optimal",
+        "carte_portefeuille_actuel": "Portefeuille actuel",
+        "carte_portefeuille_optimal": "Portefeuille optimal (max Sharpe)",
+        "lbl_rendement": "Rendement", "lbl_volatilite": "Volatilité", "lbl_sharpe": "Sharpe",
+        "tab4_header": "Matrice de corrélation",
+        "hover_correlation": "<b>%{{x}} / %{{y}}</b><br>Corrélation: %{{z:.2f}}<extra></extra>",
+        "lecture_rapide": "Lecture rapide",
+        "corr_forte": "**> 0.7** — Forte corrélation, peu de diversification",
+        "corr_moderee": "**0.3 – 0.7** — Corrélation modérée",
+        "corr_faible": "**< 0.3** — Faible corrélation, bonne diversification",
+        "tab5_header": "Frontière efficiente",
+        "legend_simules": "Portefeuilles simulés",
+        "hover_frontiere": "Vol: %{{x:.1f}}%<br>Rend: %{{y:.1f}}%<extra></extra>",
+        "chart_espace_risque": "Espace risque/rendement — 1 000 portefeuilles simulés",
+        "axis_volatilite": "Volatilité (%)",
+        "axis_rendement": "Rendement (%)",
+        "tab5_composition": "Composition du portefeuille optimal",
+        "hover_poids": "<b>%{{x}}</b><br>%{{y:.1f}}%<extra></extra>",
+    },
+    "en": {
+        "eyebrow": "Personal Equity Savings Plan (PEA)",
+        "title": "Portfolio",
+        "updated_on": "Updated on {date}",
+        "warning_non_suivis": (
+            "⚠️ **{n} transaction(s)** on **{m} unconfigured ETF(s)** in `ETFS` (new_code.py) — "
+            "**€{montant:,.0f}** not included in the totals below.\n\n{liste}\n\n"
+            "Add this/these ticker(s) to `ETFS` to track them."
+        ),
+        "hero_label": "Total portfolio value",
+        "hero_sub": "including €{etf:,.0f} invested in ETFs · €{cash:,.0f} cash available",
+        "cagr_annualise": "annualized CAGR",
+        "ledger_valeur_etf": "ETF value",
+        "ledger_vol_globale": "Overall volatility",
+        "ledger_sharpe": "Sharpe ratio",
+        "ledger_cash": "Cash available",
+        "tabs": ["Portfolio", "Price & Purchases", "Metrics", "Correlations", "Efficient frontier"],
+        "tab1_metrics_header": "Metrics by ETF",
+        "tab1_detail_header": "Detail by ETF",
+        "card_cagr": "CAGR", "card_twr": "TWR", "card_vol_etf": "Vol ETF",
+        "card_sharpe": "Sharpe", "card_sortino": "Sortino", "card_mdd": "Max DD",
+        "tab2_header": "Price evolution with purchase points",
+        "select_etf": "Choose an ETF",
+        "legend_cours": "Price",
+        "legend_achat": "Purchase",
+        "hover_achat": "<b>Purchase</b><br>Date: %{{x}}<br>Price: %{{y:.2f}}€<extra></extra>",
+        "chart_cours_achats": "{nom} — Price & Purchases",
+        "position_dans_le_temps": "Position value over time",
+        "legend_valeur_position": "Position value",
+        "tab3_repartition": "Capital allocation",
+        "chart_poids_par_etf": "Weight by ETF",
+        "chart_contribution_risque": "Risk contribution (%)",
+        "hover_contribution": "<b>%{{x}}</b><br>Contribution: %{{y:.1f}}%<extra></extra>",
+        "evolution_valeur_totale": "Total portfolio value over time",
+        "chart_valeur_empilee": "Total value stacked by ETF",
+        "poids_actuel_vs_optimal": "Current vs Optimal weight (max Sharpe)",
+        "legend_actuel": "Current",
+        "legend_optimal": "Optimal",
+        "carte_portefeuille_actuel": "Current portfolio",
+        "carte_portefeuille_optimal": "Optimal portfolio (max Sharpe)",
+        "lbl_rendement": "Return", "lbl_volatilite": "Volatility", "lbl_sharpe": "Sharpe",
+        "tab4_header": "Correlation matrix",
+        "hover_correlation": "<b>%{{x}} / %{{y}}</b><br>Correlation: %{{z:.2f}}<extra></extra>",
+        "lecture_rapide": "Quick read",
+        "corr_forte": "**> 0.7** — High correlation, little diversification",
+        "corr_moderee": "**0.3 – 0.7** — Moderate correlation",
+        "corr_faible": "**< 0.3** — Low correlation, good diversification",
+        "tab5_header": "Efficient frontier",
+        "legend_simules": "Simulated portfolios",
+        "hover_frontiere": "Vol: %{{x:.1f}}%<br>Return: %{{y:.1f}}%<extra></extra>",
+        "chart_espace_risque": "Risk/return space — 1,000 simulated portfolios",
+        "axis_volatilite": "Volatility (%)",
+        "axis_rendement": "Return (%)",
+        "tab5_composition": "Optimal portfolio composition",
+        "hover_poids": "<b>%{{x}}</b><br>%{{y:.1f}}%<extra></extra>",
+    },
+}
+
+if "lang" not in st.session_state:
+    st.session_state.lang = "fr"
+
 # ── CSS personnalisé ──────────────────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -117,6 +243,9 @@ st.markdown("""
     .masthead-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-3); display: flex; align-items: center; gap: 0.5rem; }
     .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--positive); display: inline-block; box-shadow: 0 0 0 3px rgba(79,191,130,0.15); }
 
+    /* ── Sélecteur de langue ── */
+    .lang-switch [data-testid="stSegmentedControl"] { display: flex; justify-content: flex-end; }
+
     /* ── Hero KPI ── */
     .hero {
         display: grid;
@@ -161,6 +290,21 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ── Sélecteur de langue ───────────────────────────────────────────────────────
+st.markdown('<div class="lang-switch">', unsafe_allow_html=True)
+st.segmented_control(
+    "Langue / Language",
+    options=["FR", "EN"],
+    default="FR" if st.session_state.lang == "fr" else "EN",
+    label_visibility="collapsed",
+    key="lang_switch",
+    on_change=lambda: st.session_state.update(lang=st.session_state.lang_switch.lower()),
+)
+st.markdown('</div>', unsafe_allow_html=True)
+
+lang = st.session_state.lang
+t = TRANSLATIONS[lang]
+
 # ── Chargement du portefeuille ────────────────────────────────────────────────
 # Toute la donnée (transactions, cours, indicateurs) vient d'un seul endroit :
 # new_code.build_portfolio(), piloté par la config ETFS. Ajouter un ETF suivi
@@ -187,16 +331,20 @@ df_frontiere = portfolio["df_frontiere"]
 df_poids_optimal = portfolio["df_poids_optimal"]
 comparaison = portfolio["comparaison"]
 
-LABELS = {t: cfg["nom"] for t, cfg in ETFS.items()}
-COLORS = {t: cfg["couleur"] for t, cfg in ETFS.items()}
+LABELS = {tk: cfg["nom"] for tk, cfg in ETFS.items()}
+COLORS = {tk: cfg["couleur"] for tk, cfg in ETFS.items()}
 tickers = list(ETFS.keys())
 
 # ── HEADER ────────────────────────────────────────────────────────────────────
+today = pd.Timestamp.today()
+mois = MOIS_FR if lang == "fr" else MOIS_EN
+date_str = f"{today.day} {mois[today.month - 1]} {today.year}"
+
 st.markdown(f"""
-<div class="masthead-eyebrow">Plan d'Épargne en Actions</div>
+<div class="masthead-eyebrow">{t['eyebrow']}</div>
 <div class="masthead-row">
-    <div class="masthead-title">Portefeuille</div>
-    <div class="masthead-meta"><span class="live-dot"></span>Actualisé le {pd.Timestamp.today().strftime('%d %B %Y')}</div>
+    <div class="masthead-title">{t['title']}</div>
+    <div class="masthead-meta"><span class="live-dot"></span>{t['updated_on'].format(date=date_str)}</div>
 </div>
 <div class="rule"></div>
 """, unsafe_allow_html=True)
@@ -209,11 +357,9 @@ if not etfs_non_suivis.empty:
     libelles = etfs_non_suivis["libellé"].unique()
     montant_total = etfs_non_suivis["montant_net"].abs().sum()
     liste = "\n".join(f"- **{libelle}**" for libelle in libelles)
-    st.warning(
-        f"⚠️ **{len(etfs_non_suivis)} opération(s)** sur **{len(libelles)} ETF non configuré(s)** "
-        f"dans `ETFS` (new_code.py) — **{montant_total:,.0f} €** non pris en compte dans les totaux "
-        f"ci-dessous.\n\n{liste}\n\nAjoute ce(s) ticker(s) dans `ETFS` pour qu'ils soient suivis."
-    )
+    st.warning(t["warning_non_suivis"].format(
+        n=len(etfs_non_suivis), m=len(libelles), montant=montant_total, liste=liste,
+    ))
 
 # ── KPIs globaux ──────────────────────────────────────────────────────────────
 valeur_portefeuille = valeur_totale  # ETFs uniquement
@@ -227,16 +373,16 @@ cagr_fleche = "↑" if cagr_global >= 0 else "↓"
 st.markdown(f"""
 <div class="hero">
     <div class="hero-main">
-        <div class="hero-eyebrow">Valeur totale du portefeuille</div>
+        <div class="hero-eyebrow">{t['hero_label']}</div>
         <div class="hero-value">{valeur_totale_avec_cash:,.0f} €</div>
-        <div class="hero-sub">dont {valeur_portefeuille:,.0f} € investis en ETF · {valeur_cash:,.0f} € de cash disponible</div>
-        <div class="hero-chip {cagr_sens}">{cagr_fleche} {cagr_signe}{cagr_global:.2f} % CAGR annualisé</div>
+        <div class="hero-sub">{t['hero_sub'].format(etf=valeur_portefeuille, cash=valeur_cash)}</div>
+        <div class="hero-chip {cagr_sens}">{cagr_fleche} {cagr_signe}{cagr_global:.2f} % {t['cagr_annualise']}</div>
     </div>
     <div class="ledger">
-        <div class="ledger-row"><span class="ledger-label">Valeur ETF</span><span class="ledger-value">{valeur_portefeuille:,.0f} €</span></div>
-        <div class="ledger-row"><span class="ledger-label">Volatilité globale</span><span class="ledger-value">{vol_global:.2f} %</span></div>
-        <div class="ledger-row"><span class="ledger-label">Ratio de Sharpe</span><span class="ledger-value">{sharpe_global:.2f}</span></div>
-        <div class="ledger-row"><span class="ledger-label">Cash disponible</span><span class="ledger-value">{valeur_cash:,.0f} €</span></div>
+        <div class="ledger-row"><span class="ledger-label">{t['ledger_valeur_etf']}</span><span class="ledger-value">{valeur_portefeuille:,.0f} €</span></div>
+        <div class="ledger-row"><span class="ledger-label">{t['ledger_vol_globale']}</span><span class="ledger-value">{vol_global:.2f} %</span></div>
+        <div class="ledger-row"><span class="ledger-label">{t['ledger_sharpe']}</span><span class="ledger-value">{sharpe_global:.2f}</span></div>
+        <div class="ledger-row"><span class="ledger-label">{t['ledger_cash']}</span><span class="ledger-value">{valeur_cash:,.0f} €</span></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -244,13 +390,9 @@ st.markdown(f"""
 st.markdown('<div class="rule"></div>', unsafe_allow_html=True)
 
 # ── TABS ──────────────────────────────────────────────────────────────────────
-tab3, tab2, tab1, tab4, tab5 = st.tabs([
-    "Portefeuille",
-    "Cours & Achats",
-    "Métriques",
-    "Corrélations",
-    "Frontière efficiente",
-])
+tab3, tab2, tab1, tab4, tab5 = st.tabs(
+    [t["tabs"][0], t["tabs"][1], t["tabs"][2], t["tabs"][3], t["tabs"][4]]
+)
 
 INK = "#edf0f4"
 INK_MUTED = "#9aa3b2"
@@ -275,10 +417,10 @@ def titre(text):
 # TAB 1 — Récapitulatif des indicateurs
 # ────────────────────────────────────────────────────────────────────────────
 with tab1:
-    st.markdown("## Métriques par ETF")
+    st.markdown(f"## {t['tab1_metrics_header']}")
 
     df_table = pd.DataFrame({
-        LABELS[t]: {
+        LABELS[tk]: {
             "TWR (%)": ind["twr"],
             "CAGR (%)": ind["cagr"],
             "MWR (%)": ind["mwr"],
@@ -288,7 +430,7 @@ with tab1:
             "Sortino": ind["sortino"],
             "Max DD (%)": ind["mdd"],
         }
-        for t, ind in indicateurs.items()
+        for tk, ind in indicateurs.items()
     }).T
 
     def color_val(val):
@@ -303,7 +445,7 @@ with tab1:
     st.dataframe(styled, use_container_width=True, height=280)
 
     st.markdown('<div class="rule"></div>', unsafe_allow_html=True)
-    st.markdown("## Détail par ETF")
+    st.markdown(f"## {t['tab1_detail_header']}")
 
     cols = st.columns(3)
     for idx, ticker in enumerate(tickers):
@@ -318,12 +460,12 @@ with tab1:
                 <div class="name">{LABELS[ticker]}</div>
                 <div class="value">{valeur_etf:,.0f} €</div>
                 <div class="etf-grid">
-                    <div><div class="lbl">CAGR</div><div class="val" style="color:{color}">{ind['cagr']:+.2f}%</div></div>
-                    <div><div class="lbl">TWR</div><div class="val" style="color:{color}">{ind['twr']:+.2f}%</div></div>
-                    <div><div class="lbl">Vol ETF</div><div class="val">{ind['vol_etf']:.1f}%</div></div>
-                    <div><div class="lbl">Sharpe</div><div class="val">{ind['sharpe']:.2f}</div></div>
-                    <div><div class="lbl">Sortino</div><div class="val">{ind['sortino']:.2f}</div></div>
-                    <div><div class="lbl">Max DD</div><div class="val" style="color:#e0655c">{ind['mdd']:.2f}%</div></div>
+                    <div><div class="lbl">{t['card_cagr']}</div><div class="val" style="color:{color}">{ind['cagr']:+.2f}%</div></div>
+                    <div><div class="lbl">{t['card_twr']}</div><div class="val" style="color:{color}">{ind['twr']:+.2f}%</div></div>
+                    <div><div class="lbl">{t['card_vol_etf']}</div><div class="val">{ind['vol_etf']:.1f}%</div></div>
+                    <div><div class="lbl">{t['card_sharpe']}</div><div class="val">{ind['sharpe']:.2f}</div></div>
+                    <div><div class="lbl">{t['card_sortino']}</div><div class="val">{ind['sortino']:.2f}</div></div>
+                    <div><div class="lbl">{t['card_mdd']}</div><div class="val" style="color:#e0655c">{ind['mdd']:.2f}%</div></div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -332,12 +474,12 @@ with tab1:
 # TAB 2 — Cours & Achats dans le temps
 # ────────────────────────────────────────────────────────────────────────────
 with tab2:
-    st.markdown("## Évolution du cours avec points d'achat")
+    st.markdown(f"## {t['tab2_header']}")
 
     ticker_choisi = st.selectbox(
-        "Choisir un ETF",
+        t["select_etf"],
         options=tickers,
-        format_func=lambda t: f"{LABELS[t]} ({t})"
+        format_func=lambda tk: f"{LABELS[tk]} ({tk})"
     )
 
     data_etf = data_prix_dict[ticker_choisi].copy()
@@ -359,7 +501,7 @@ with tab2:
         x=prix_journalier["Date"],
         y=prix_journalier["open_price"],
         mode="lines",
-        name="Cours",
+        name=t["legend_cours"],
         line=dict(color=color_etf, width=2),
         fill="tozeroy",
         fillcolor=f"rgba{tuple(int(color_etf.lstrip('#')[i:i+2], 16) for i in (0, 2, 4)) + (0.08,)}",
@@ -371,26 +513,26 @@ with tab2:
             x=achats["date_opération"],
             y=achats["cours"],
             mode="markers",
-            name="Achat",
+            name=t["legend_achat"],
             marker=dict(
                 color=BRASS,
                 size=10,
                 symbol="triangle-up",
                 line=dict(color="#0b0d11", width=1.5)
             ),
-            hovertemplate="<b>Achat</b><br>Date: %{x}<br>Cours: %{y:.2f}€<extra></extra>"
+            hovertemplate=t["hover_achat"]
         ))
 
     fig.update_layout(
         **PLOTLY_LAYOUT,
-        title=titre(f"{LABELS[ticker_choisi]} — Cours & Achats"),
+        title=titre(t["chart_cours_achats"].format(nom=LABELS[ticker_choisi])),
         legend=dict(bgcolor="rgba(0,0,0,0)"),
         height=420,
     )
     st.plotly_chart(fig, use_container_width=True)
 
     # Évolution valeur investie
-    st.markdown("### Valeur de la position dans le temps")
+    st.markdown(f"### {t['position_dans_le_temps']}")
 
     prix_tot = data_etf.copy()
     prix_tot["Date"] = pd.to_datetime(prix_tot["Date"]).dt.normalize()
@@ -402,7 +544,7 @@ with tab2:
         x=prix_tot["Date"],
         y=prix_tot["prix_tot"],
         mode="lines",
-        name="Valeur position",
+        name=t["legend_valeur_position"],
         line=dict(color=color_etf, width=2),
         fill="tozeroy",
         fillcolor=f"rgba{tuple(int(color_etf.lstrip('#')[i:i+2], 16) for i in (0, 2, 4)) + (0.1,)}",
@@ -414,14 +556,14 @@ with tab2:
 # TAB 3 — Portefeuille global
 # ────────────────────────────────────────────────────────────────────────────
 with tab3:
-    st.markdown("## Répartition du capital")
+    st.markdown(f"## {t['tab3_repartition']}")
 
     col_pie, col_risk = st.columns(2)
 
     with col_pie:
-        labels_pie = [LABELS[t] for t in df_repartition.index]
+        labels_pie = [LABELS[tk] for tk in df_repartition.index]
         values_pie = df_repartition["valeur (€)"].values
-        colors_pie = [COLORS[t] for t in df_repartition.index]
+        colors_pie = [COLORS[tk] for tk in df_repartition.index]
 
         fig_pie = go.Figure(go.Pie(
             labels=labels_pie,
@@ -433,7 +575,7 @@ with tab3:
         ))
         fig_pie.update_layout(
             **PLOTLY_LAYOUT,
-            title=titre("Poids par ETF"),
+            title=titre(t["chart_poids_par_etf"]),
             annotations=[dict(
                 text=f"<b>{valeur_totale:,.0f}€</b>",
                 x=0.5, y=0.5, font_size=14,
@@ -446,25 +588,25 @@ with tab3:
         st.plotly_chart(fig_pie, use_container_width=True)
 
     with col_risk:
-        contrib_labels = [LABELS[t] for t in df_contrib.index]
+        contrib_labels = [LABELS[tk] for tk in df_contrib.index]
         contrib_values = df_contrib["contribution_risque (%)"].values
-        contrib_colors = [COLORS[t] for t in df_contrib.index]
+        contrib_colors = [COLORS[tk] for tk in df_contrib.index]
 
         fig_bar = go.Figure(go.Bar(
             x=contrib_labels,
             y=contrib_values,
             marker=dict(color=contrib_colors, line=dict(color="#0b0d11", width=1)),
-            hovertemplate="<b>%{x}</b><br>Contribution: %{y:.1f}%<extra></extra>",
+            hovertemplate=t["hover_contribution"],
         ))
         fig_bar.update_layout(
             **PLOTLY_LAYOUT,
-            title=titre("Contribution au risque (%)"),
+            title=titre(t["chart_contribution_risque"]),
             height=380,
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
     # Évolution valeur totale portefeuille
-    st.markdown("### Évolution de la valeur totale du portefeuille")
+    st.markdown(f"### {t['evolution_valeur_totale']}")
 
     all_prix = {}
     for ticker, data in data_prix_dict.items():
@@ -492,27 +634,27 @@ with tab3:
 
     fig_tot.update_layout(
         **PLOTLY_LAYOUT,
-        title=titre("Valeur totale empilée par ETF"),
+        title=titre(t["chart_valeur_empilee"]),
         height=380,
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(size=10)),
     )
     st.plotly_chart(fig_tot, use_container_width=True)
 
     # Comparaison poids actuel vs optimal
-    st.markdown("### Poids actuel vs Optimal (max Sharpe)")
+    st.markdown(f"### {t['poids_actuel_vs_optimal']}")
     poids_actuel = df_repartition["poids (%)"]
     poids_opt    = df_poids_optimal["poids_optimal (%)"]
 
     fig_comp = go.Figure()
     fig_comp.add_trace(go.Bar(
-        name="Actuel",
-        x=[LABELS[t] for t in poids_actuel.index],
+        name=t["legend_actuel"],
+        x=[LABELS[tk] for tk in poids_actuel.index],
         y=poids_actuel.values,
         marker_color=BRASS,
     ))
     fig_comp.add_trace(go.Bar(
-        name="Optimal",
-        x=[LABELS[t] for t in poids_opt.index],
+        name=t["legend_optimal"],
+        x=[LABELS[tk] for tk in poids_opt.index],
         y=poids_opt.values,
         marker_color="#3987e5",
     ))
@@ -527,8 +669,8 @@ with tab3:
     # Métriques actuel vs optimal
     ca, co = st.columns(2)
     for col, titre_carte, cle, couleur in (
-        (ca, "Portefeuille actuel", "actuel", BRASS),
-        (co, "Portefeuille optimal (max Sharpe)", "optimal", "#3987e5"),
+        (ca, t["carte_portefeuille_actuel"], "actuel", BRASS),
+        (co, t["carte_portefeuille_optimal"], "optimal", "#3987e5"),
     ):
         m = comparaison[cle]
         with col:
@@ -536,9 +678,9 @@ with tab3:
             <div class="etf-card" style="--card-color:{couleur}">
                 <div class="name">{titre_carte}</div>
                 <div class="etf-grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:0.6rem">
-                    <div><div class="lbl">Rendement</div><div class="val" style="color:{couleur}">{m['rendement']:.2f}%</div></div>
-                    <div><div class="lbl">Volatilité</div><div class="val">{m['vol']:.2f}%</div></div>
-                    <div><div class="lbl">Sharpe</div><div class="val">{m['sharpe']:.2f}</div></div>
+                    <div><div class="lbl">{t['lbl_rendement']}</div><div class="val" style="color:{couleur}">{m['rendement']:.2f}%</div></div>
+                    <div><div class="lbl">{t['lbl_volatilite']}</div><div class="val">{m['vol']:.2f}%</div></div>
+                    <div><div class="lbl">{t['lbl_sharpe']}</div><div class="val">{m['sharpe']:.2f}</div></div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -547,9 +689,9 @@ with tab3:
 # TAB 4 — Corrélations
 # ────────────────────────────────────────────────────────────────────────────
 with tab4:
-    st.markdown("## Matrice de corrélation")
+    st.markdown(f"## {t['tab4_header']}")
 
-    corr_labels = [LABELS[t] for t in correlation_matrix.index]
+    corr_labels = [LABELS[tk] for tk in correlation_matrix.index]
     corr_values = correlation_matrix.values
 
     fig_corr = go.Figure(go.Heatmap(
@@ -565,7 +707,7 @@ with tab4:
         text=np.round(corr_values, 2),
         texttemplate="%{text}",
         textfont=dict(size=12, family="IBM Plex Mono, monospace"),
-        hovertemplate="<b>%{x} / %{y}</b><br>Corrélation: %{z:.2f}<extra></extra>",
+        hovertemplate=t["hover_correlation"],
     ))
     fig_corr.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
@@ -579,17 +721,17 @@ with tab4:
 
     st.plotly_chart(fig_corr, use_container_width=True)
 
-    st.markdown("### Lecture rapide")
+    st.markdown(f"### {t['lecture_rapide']}")
     col_a, col_b, col_c = st.columns(3)
-    col_a.error("**> 0.7** — Forte corrélation, peu de diversification")
-    col_b.warning("**0.3 – 0.7** — Corrélation modérée")
-    col_c.success("**< 0.3** — Faible corrélation, bonne diversification")
+    col_a.error(t["corr_forte"])
+    col_b.warning(t["corr_moderee"])
+    col_c.success(t["corr_faible"])
 
 # ────────────────────────────────────────────────────────────────────────────
 # TAB 5 — Frontière efficiente
 # ────────────────────────────────────────────────────────────────────────────
 with tab5:
-    st.markdown("## Frontière efficiente")
+    st.markdown(f"## {t['tab5_header']}")
 
     fig_front = go.Figure()
 
@@ -599,7 +741,7 @@ with tab5:
         x=df_frontiere["vol"],
         y=df_frontiere["rendement"],
         mode="markers",
-        name="Portefeuilles simulés",
+        name=t["legend_simules"],
         marker=dict(
             color=df_frontiere["sharpe"],
             colorscale=[
@@ -616,7 +758,7 @@ with tab5:
                 bordercolor=BORDER_SOFT,
             ),
         ),
-        hovertemplate="Vol: %{x:.1f}%<br>Rend: %{y:.1f}%<extra></extra>",
+        hovertemplate=t["hover_frontiere"],
     ))
 
     # Portefeuille actuel
@@ -624,9 +766,9 @@ with tab5:
         x=[comparaison["actuel"]["vol"]],
         y=[comparaison["actuel"]["rendement"]],
         mode="markers+text",
-        name="Actuel",
+        name=t["legend_actuel"],
         marker=dict(color=BRASS, size=14, symbol="star", line=dict(color="#0b0d11", width=1.5)),
-        text=["Actuel"],
+        text=[t["legend_actuel"]],
         textposition="top center",
         textfont=dict(color=BRASS, size=11),
     ))
@@ -636,33 +778,44 @@ with tab5:
         x=[comparaison["optimal"]["vol"]],
         y=[comparaison["optimal"]["rendement"]],
         mode="markers+text",
-        name="Optimal",
+        name=t["legend_optimal"],
         marker=dict(color="#3987e5", size=14, symbol="star", line=dict(color="#0b0d11", width=1.5)),
-        text=["Optimal"],
+        text=[t["legend_optimal"]],
         textposition="top center",
         textfont=dict(color="#3987e5", size=11),
     ))
 
     fig_front.update_layout(
         **PLOTLY_LAYOUT,
-        title=titre("Espace risque/rendement — 1 000 portefeuilles simulés"),
-        xaxis_title="Volatilité (%)",
-        yaxis_title="Rendement (%)",
+        title=titre(t["chart_espace_risque"]),
+        xaxis_title=t["axis_volatilite"],
+        yaxis_title=t["axis_rendement"],
         height=560,
         legend=dict(orientation="h", x=0.5, xanchor="center", y=-0.18, bgcolor="rgba(0,0,0,0)"),
     )
     st.plotly_chart(fig_front, use_container_width=True)
 
-    st.markdown("### Composition du portefeuille optimal")
-    opt_labels = [LABELS[t] for t in df_poids_optimal.index]
+    st.markdown(f"### {t['tab5_composition']}")
+    opt_labels = [LABELS[tk] for tk in df_poids_optimal.index]
     opt_values = df_poids_optimal["poids_optimal (%)"].values
-    opt_colors = [COLORS[t] for t in df_poids_optimal.index]
+    opt_colors = [COLORS[tk] for tk in df_poids_optimal.index]
 
+    # Barres fines et espacées (largeur fixe < 1 unité de catégorie) + libellés
+    # au-dessus : évite l'effet "gros pavés" de barres larges avec peu de
+    # catégories sur une hauteur de graphique standard.
     fig_opt = go.Figure(go.Bar(
         x=opt_labels,
         y=opt_values,
+        width=0.4,
         marker=dict(color=opt_colors, line=dict(color="#0b0d11", width=1)),
-        hovertemplate="<b>%{x}</b><br>%{y:.1f}%<extra></extra>",
+        text=[f"{v:.1f}%" for v in opt_values],
+        textposition="outside",
+        textfont=dict(family="IBM Plex Mono, monospace", size=11, color=INK),
+        hovertemplate=t["hover_poids"],
     ))
-    fig_opt.update_layout(**PLOTLY_LAYOUT, height=300)
+    layout_opt = {
+        **PLOTLY_LAYOUT,
+        "yaxis": dict(gridcolor=BORDER_SOFT, zeroline=False, range=[0, float(opt_values.max()) * 1.25]),
+    }
+    fig_opt.update_layout(**layout_opt, height=380)
     st.plotly_chart(fig_opt, use_container_width=True)

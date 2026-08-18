@@ -32,12 +32,12 @@ TAUX_SANS_RISQUE = 3.0  # % — utilisé pour Sharpe / Sortino
 ETFS = {
     "PASI.PA": {
         "libelle": "AM.PEA CHINE (MS.C.)SCR.UC.ETF AM.PEA CHN SCREEN.",
-        "nom": "Chine",
+        "nom": "MSCI China A",
         "couleur": "#3987e5",
     },
     "PINR.PA": {
         "libelle": "AMUN.PEA INDE UC.ETF ACC FCP AM.PEA INDE ACC",
-        "nom": "Inde",
+        "nom": "MSCI India",
         "couleur": "#c98500",
     },
     "ETSZ.DE": {
