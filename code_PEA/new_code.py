@@ -517,3 +517,6 @@ if __name__ == "__main__":
         print(f"\n⚠️  {len(non_suivis)} opération(s) sur des ETF absents de ETFS, non comptées dans les totaux :")
         for libelle in non_suivis["libellé"].unique():
             print(f"   - {libelle}")
+
+
+#print("ça marche pas")
