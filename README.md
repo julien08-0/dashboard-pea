@@ -1,38 +1,43 @@
 # Dashboard PEA
 
-Dashboard de suivi de portefeuille PEA multi-ETF : à partir d'un export de
-transactions, il calcule les indicateurs de performance par ETF et pour le
-portefeuille global, et les affiche dans une interface Streamlit interactive.
+Multi-ETF PEA portfolio tracking dashboard: starting from a transaction
+export, it computes performance metrics per ETF and for the overall
+portfolio, and displays them in an interactive Streamlit interface.
 
-**Démo en ligne :** [dashboard-pea-julien.streamlit.app](https://dashboard-pea-julien.streamlit.app/)
-*(données anonymisées à but de démonstration — voir plus bas)*
+## View the project
 
-## Fonctionnalités
+**Just one click:** [dashboard-pea-julien.streamlit.app](https://dashboard-pea-julien.streamlit.app/)
 
-- **Indicateurs par ETF** : TWR, CAGR, MWR, volatilité, ratio de Sharpe, ratio de
-  Sortino, Max Drawdown
-- **Portefeuille global** : répartition du capital, contribution au risque par
-  actif, matrice de corrélation entre ETF
-- **Frontière efficiente** : simulation de portefeuilles aléatoires et calcul
-  du portefeuille optimal (max Sharpe) par rapport au portefeuille actuel
-- **Historique** : courbe de cours par ETF avec points d'achat, évolution de
-  la valeur de chaque position dans le temps
+No installation, no configuration needed — the app is already live with
+demo data *(anonymized — see below)*. The following sections
+(architecture, running locally) are only useful for those who want to look
+at the code in more detail.
+
+## Features
+
+- **Per-ETF metrics**: TWR, CAGR, MWR, volatility, Sharpe ratio, Sortino
+  ratio, Max Drawdown
+- **Overall portfolio**: capital allocation, risk contribution per asset,
+  correlation matrix between ETFs
+- **Efficient frontier**: simulation of random portfolios and computation of
+  the optimal portfolio (max Sharpe) relative to the current portfolio
+- **History**: price chart per ETF with purchase points, evolution of each
+  position's value over time
 
 ## Architecture
 
-- `new_code.py` — chargement des transactions, récupération des cours
-  historiques (yfinance) et calcul de tous les indicateurs. Un seul
-  dictionnaire de configuration (`ETFS`) pilote l'ensemble : ajouter un ETF
-  suivi ne nécessite de modifier que cette entrée, rien d'autre dans le
-  reste du code.
-- `new_dashboard.py` — interface Streamlit, entièrement générée à partir de
-  cette même configuration (aucun ETF n'est codé en dur côté interface).
+- `new_code.py` — loads transactions, fetches historical prices (yfinance)
+  and computes all metrics. A single configuration dictionary (`ETFS`)
+  drives everything: adding a tracked ETF only requires editing this entry,
+  nothing else in the rest of the code.
+- `new_dashboard.py` — Streamlit interface, entirely generated from this
+  same configuration (no ETF is hardcoded on the interface side).
 
-## Stack technique
+## Tech stack
 
 Python · Streamlit · pandas · numpy · yfinance · scipy · plotly
 
-## Lancer en local
+## Running locally
 
 ```bash
 cd code_PEA
@@ -42,21 +47,21 @@ pip install -r requirements.txt
 streamlit run new_dashboard.py
 ```
 
-Par défaut, l'application utilise le fichier de démo anonymisé
-(`code_PEA/data/extraction_demo.xlsx`). Pour utiliser son propre export PEA,
-définir la variable d'environnement `PEA_EXCEL_PATH` vers son fichier avant
-de lancer Streamlit :
+By default, the app uses the anonymized demo file
+(`code_PEA/data/extraction_demo.xlsx`). To use your own PEA export, set the
+`PEA_EXCEL_PATH` environment variable to point to your file before launching
+Streamlit:
 
 ```bash
-set PEA_EXCEL_PATH=chemin\vers\mon_export.xlsx   # Windows (cmd)
+set PEA_EXCEL_PATH=path\to\my_export.xlsx   # Windows (cmd)
 streamlit run new_dashboard.py
 ```
 
-## À propos des données de démo
+## About the demo data
 
-Le fichier `code_PEA/data/extraction_demo.xlsx` est une version anonymisée
-d'un vrai historique de transactions PEA : les ETF suivis et les dates
-d'opération sont réels, mais les quantités et les montants investis ont été
-randomisés (et volontairement amplifiés) pour ne représenter aucun
-portefeuille réel plausible. Les cours affichés restent les prix de marché
-réels de chaque ETF, afin que les graphiques restent cohérents.
+The file `code_PEA/data/extraction_demo.xlsx` is an anonymized version of a
+real PEA transaction history: the tracked ETFs and operation dates are real,
+but the quantities and invested amounts have been randomized (and
+deliberately amplified) so as not to represent any plausible real portfolio.
+The displayed prices remain the real market prices of each ETF, so that the
+charts stay consistent.

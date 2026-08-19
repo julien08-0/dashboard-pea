@@ -26,6 +26,7 @@ TRANSLATIONS = {
         "eyebrow": "Plan d'Épargne en Actions",
         "title": "Portefeuille",
         "updated_on": "Actualisé le {date}",
+        "demo_note": "Démo — montants, dates et titres modifiés",
         "warning_non_suivis": (
             "⚠️ **{n} opération(s)** sur **{m} ETF non configuré(s)** dans `ETFS` (new_code.py) — "
             "**{montant:,.0f} €** non pris en compte dans les totaux ci-dessous.\n\n{liste}\n\n"
@@ -82,6 +83,7 @@ TRANSLATIONS = {
         "eyebrow": "Personal Equity Savings Plan (PEA)",
         "title": "Portfolio",
         "updated_on": "Updated on {date}",
+        "demo_note": "Demo — amounts, dates and tickers altered",
         "warning_non_suivis": (
             "⚠️ **{n} transaction(s)** on **{m} unconfigured ETF(s)** in `ETFS` (new_code.py) — "
             "**€{montant:,.0f}** not included in the totals below.\n\n{liste}\n\n"
@@ -241,6 +243,7 @@ st.markdown("""
     .masthead-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; }
     .masthead-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 2.6rem; color: var(--ink); letter-spacing: -0.01em; line-height: 1; }
     .masthead-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-3); display: flex; align-items: center; gap: 0.5rem; }
+    .masthead-demo-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-style: italic; color: var(--ink-3); margin-top: 0.3rem; }
     .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--positive); display: inline-block; box-shadow: 0 0 0 3px rgba(79,191,130,0.15); }
 
     /* ── Sélecteur de langue ── */
@@ -346,6 +349,7 @@ st.markdown(f"""
     <div class="masthead-title">{t['title']}</div>
     <div class="masthead-meta"><span class="live-dot"></span>{t['updated_on'].format(date=date_str)}</div>
 </div>
+<div class="masthead-demo-note">{t['demo_note']}</div>
 <div class="rule"></div>
 """, unsafe_allow_html=True)
 
